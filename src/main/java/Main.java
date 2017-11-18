@@ -9,6 +9,7 @@ public class Main
         port(getHerokuAssignedPort());
 
         get("/hello", (req, res) -> "Hello Heroku World");
+        get("/", (req,res) -> "Hello There Heroku for Java, nice for you to have joined us! ;)");
     }
 
 
