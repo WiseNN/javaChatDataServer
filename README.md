@@ -2,4 +2,30 @@
 
 This is a Java Server used for intensive CPU Data Manipulation. This is a client server, and will take requests from the API built in the: csc2720_Project repository.  All group members responsible for constructing algorithms to aggregate the data model, please clone this repository. 
 
+<b>The Following code block is reffering to changes that need to be made in the DataProcessing/Encryption.java file</b>
+
+
+<ul>Changes:</ul>
+
+The caller is going to call your function like this (data types are in arguments):
+    
+    Encryption op1 = new Encryption();
+		HashMap<String , Object> returnValue =	op1.wrapperFunc(String , HashMap<String, Object>);
+
+1) Your wrapper function should be able to accept a string parameter, and a HashMap of type <String, String>
+2) Write a switch or if statement to handle the request of encrypt or decrypt
+3) You should return a value of type HashMap<String, String>
+4) ALL of the methods inside of your wrapper function should be private and none-accessible outside of the class
+
+DO NOT FOCUS ON, WE WILL REVISIT
+
+5) Remember the purpose of your algorithm, to encrypt and decrypt data; which means you need to store the key somewhere
+6) When your wrapper function is called to encrypt data, you should encrypt/Salt the array of random numbers, keep the key, and
+destroy the array of random numbers. IT SHOULD NOT BE STORED IN YOUR PROGRAM
+7) After you have encrypted the Array of random numbers, the salted key to decrypt the array of
+random numbers should be returned inside of the hashMap under the key "saltedKey"
+
+
+If you have any questions please do not suffer in silence, we are here to help one another.
+
 Thank you!
