@@ -7,10 +7,50 @@ This is a Java Server used for intensive CPU Data Manipulation. This is a client
 
 <ul>Changes:</ul>
 
+
+
 The caller is going to call your function like this (data types are in arguments):
     
     Encryption op1 = new Encryption();
 		HashMap<String , Object> returnValue =	op1.wrapperFunc(String , HashMap<String, Object>);
+		
+Example <b>HashMap</b> parameter: 
+```
+{
+   "_id": "WiseN",
+   "__v": 4,
+   "privateConvos": [
+      {
+         "recipientId": "TaslimD",
+         "_id": "WiseN",
+         "__v": 0,
+         "messages": [
+            {
+               "_id": "5a130b5ac9b53d2d73e10952",
+               "text": "Hey Whats Up",
+               "sender": "WiseN",
+               "time": " 12:05:29 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            },
+            {
+               "_id": "5a130c2fc9b53d2d73e10953",
+               "text": "Hey, Nothing much, this API has really been kicking my ass",
+               "sender": "TaslimD",
+               "time": " 12:09:03 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            },
+            {
+               "_id": "5a130c70c9b53d2d73e10954",
+               "text": "I bet. This homework as pretty much taken over my life. Im just trying to stay a float lol",
+               "sender": "WiseN",
+               "time": " 12:10:08 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            }
+         ]
+      }
+   ]
+}
+```
 
 1) Your wrapper function should be able to accept a string parameter, and a HashMap of type <String, Object>
 2) Write a switch or if statement to handle the request of encrypt or decrypt
