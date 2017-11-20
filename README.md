@@ -54,7 +54,7 @@ Example <b>HashMap</b> parameter:
 
 1) Your wrapper function should be able to accept a string parameter, and a HashMap of type <String, Object>
 2) Write a switch or if statement to handle the request of encrypt or decrypt
-3) You should <b>return a value of type HashMap<String, Object>  that looks just like the incoming argument (above)</b>
+3) You should <b>return a value of type </b>`HashMap<String, Object>`<b> that looks just like the incoming argument (above)</b>
 4) ALL of the methods inside of your wrapper function should be private and none-accessible outside of the class
 
 DO NOT FOCUS ON, WE WILL REVISIT
