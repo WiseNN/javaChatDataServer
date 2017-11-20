@@ -12,7 +12,7 @@ The caller is going to call your function like this (data types are in arguments
     Encryption op1 = new Encryption();
 		HashMap<String , Object> returnValue =	op1.wrapperFunc(String , HashMap<String, Object>);
 
-1) Your wrapper function should be able to accept a string parameter, and a HashMap of type <String, String>
+1) Your wrapper function should be able to accept a string parameter, and a HashMap of type <String, Object>
 2) Write a switch or if statement to handle the request of encrypt or decrypt
 3) You should return a value of type HashMap<String, String>
 4) ALL of the methods inside of your wrapper function should be private and none-accessible outside of the class
