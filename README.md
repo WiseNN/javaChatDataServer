@@ -21,27 +21,27 @@ Example <b>HashMap</b> parameter:
    "__v": 4,
    "privateConvos": [
       {
-         "recipientId": "TaslimD",
+         "recipientId": "TaslimD", (encrypt)
          "_id": "WiseN",
          "__v": 0,
          "messages": [
             {
                "_id": "5a130b5ac9b53d2d73e10952",
-               "text": "Hey Whats Up",
+               "text": "Hey Whats Up", (encrypt)
                "sender": "WiseN",
                "time": " 12:05:29 GMT-0500 (EST)",
                "date": "October 20, 2017"
             },
             {
                "_id": "5a130c2fc9b53d2d73e10953",
-               "text": "Hey, Nothing much, this API has really been kicking my ass",
+               "text": "Hey, Nothing much, this API has really been kicking my ass", (encrypt)
                "sender": "TaslimD",
                "time": " 12:09:03 GMT-0500 (EST)",
                "date": "October 20, 2017"
             },
             {
                "_id": "5a130c70c9b53d2d73e10954",
-               "text": "I bet. This homework as pretty much taken over my life. Im just trying to stay a float lol",
+               "text": "I bet. This homework as pretty much taken over my life. Im just trying to stay a float lol", (encrypt)
                "sender": "WiseN",
                "time": " 12:10:08 GMT-0500 (EST)",
                "date": "October 20, 2017"
