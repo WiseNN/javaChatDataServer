@@ -27,7 +27,7 @@ Example <b>HashMap</b> parameter:
          "messages": [
             {
                "_id": "5a130b5ac9b53d2d73e10952",
-               "text": "Hey Whats Up", (encrypt)
+               "text": "Hey Whats Up", (***ENCRYPT ***)
                "sender": "WiseN",
                "time": " 12:05:29 GMT-0500 (EST)",
                "date": "October 20, 2017"
