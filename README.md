@@ -65,6 +65,8 @@ DO NOT FOCUS ON, WE WILL REVISIT
 destroy the array of random numbers. IT SHOULD NOT BE STORED IN YOUR PROGRAM
 7) After you have encrypted the Array of random numbers, the salted key to decrypt the array of
 random numbers should be returned inside of the hashMap under the key "saltedKey"
+<hr />
+The library er are using to read and write json objects is called <b>JSON.simple</b>. There are many tutorials and videos on how to use JSON.simple. A <i>simple</i> google search will help you. However, you can start here: https://www.mkyong.com/java/json-simple-example-read-and-write-json/ . The dependency for this libary has already been added to the repository.
 
 
 If you have any questions please do not suffer in silence, we are here to help one another.
