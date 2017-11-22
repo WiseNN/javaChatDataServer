@@ -69,6 +69,11 @@ random numbers should be returned inside of the hashMap under the key "saltedKey
 The library er are using to read and write json objects is called <b>JSON.simple</b>. There are many tutorials and videos on how to use JSON.simple. A <i>simple</i> google search will help you. However, you can start here: https://www.mkyong.com/java/json-simple-example-read-and-write-json/ . The dependency for this libary has already been added to the repository.
 
 
+<b>Please see the createAndPrintJSONObject()</b> function in the <b>Main class</b> file. Run it <i>(It will start the server)</i>, and look at the console output. Because I am having issues "pretty printing" the JSON object, copy and paste it into this 
+website: https://jsonformatter.curiousconcept.com , you will see that it is the same as the example object.
+
+
+
 If you have any questions please do not suffer in silence, we are here to help one another.
 
 Thank you!
