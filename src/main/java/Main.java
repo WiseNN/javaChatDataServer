@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.*;
 
@@ -34,24 +35,54 @@ public class Main
 
 
         //I am going to send a String, HashMap<String, String>
-        get("/encodeData/:data", (req, res) -> req.params("data"));
-        get("/decodeData", (req, res) -> "Decoding Data");
+        get("/encodeData/:data", (req, res) -> mainClassObj.createAndPrintJSONObject());
+        get("/decodeData", (req, res) -> mainClassObj.createAndPrintJSONObject() );
         get("/", (req,res) -> "Hello There Heroku for Java, nice for you to have joined us! ;)");
     }
 
 
 
-    void createAndPrintJSONObject()
+    JSONObject createAndPrintJSONObject()
     {
+
+        JSONObject ob1 = new JSONObject();
 
         /*
         *
         *
 {
-   "_id": "WiseN",
+   "_id": "WiseNN",
    "__v": 4,
    "privateConvos": [
       {
+         "recipientId": "TaslimD", (***ENCRYPT ***)
+         "_id": "WiseN",
+         "__v": 0,
+         "messages": [
+            {
+               "_id": "5a130b5ac9b53d2d73e10952",
+               "text": "Hey Whats Up", (***ENCRYPT ***)
+               "sender": "WiseN",
+               "time": " 12:05:29 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            },
+            {
+               "_id": "5a130c2fc9b53d2d73e10953",
+               "text": "Hey, Nothing much, this API has really been kicking my ass", (***ENCRYPT ***)
+               "sender": "TaslimD",
+               "time": " 12:09:03 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            },
+            {
+               "_id": "5a130c70c9b53d2d73e10954",
+               "text": "I bet. This homework as pretty much taken over my life. Im just trying to stay a float lol", (***ENCRYPT ***)
+               "sender": "WiseN",
+               "time": " 12:10:08 GMT-0500 (EST)",
+               "date": "October 20, 2017"
+            }
+            ,
+
+            {
          "recipientId": "TaslimD", (***ENCRYPT ***)
          "_id": "WiseN",
          "__v": 0,
@@ -129,14 +160,24 @@ public class Main
         //we are also adding privateConvos object to parent object
         parentObj.put("privateConvos", privateConvos);
 
-        //print the parentObj to see output
-        System.out.println(parentObj.toJSONString());
+        JSONArray privateConvos2 = (JSONArray) parentObj.get("privateConvos");
+        JSONObject privateConvo2 =  (JSONObject) privateConvos2.get(0);
+             privateConvo2.get("messages");
 
 
-        //please note that this is possible as well (below)
 
-//        JSONObject json = new JSONObject(jsonString); // Convert text to object
-//        System.out.println(json.toString(4)); // Print it with specified indentation
+
+
+
+
+
+
+
+
+//
+
+        return parentObj;
+
     }
 
 
