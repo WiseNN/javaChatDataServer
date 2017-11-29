@@ -168,16 +168,16 @@ public class Encryption3
      // create a json array convArray
         JSONArray convoArray = new JSONArray();
         
-     // adding the privateConvoObj to the covoArray
+
         convoArray.put(privateConvoObj);
-        
-     // adding values to the parent object
+
+//		------------------- ------------------- -------------------production code below this line ------------------- ------------------- ------------------- -------------------
+//		------------------- ------------------- -------------------production code below this line ------------------- ------------------- ------------------- -------------------
+
 		JSONObject parentObj = new JSONObject();
         parentObj.put("_id", "WiseN");
         parentObj.put("_v", 4);
         parentObj.put("privateConvos",convoArray);
-//        JSONObject suck  = wrapper(parentObj);
-//        System.out.println(suck);
 
 		Encryption3 op1 = new Encryption3();
 
@@ -186,12 +186,6 @@ public class Encryption3
         
        void wrapper(JSONObject parentObj, String doWhat, ArrayList<Integer> randonNumsAryFromClient)
        {
-//       {   String[] both = (String[])ArrayUtils.addAll(first, second);
-       
-       
-
-       
-       
     	  //create arrayList for randomNumbers if encrypting
     	   ArrayList<Integer> randomNumsAry = new ArrayList<Integer>();
 
@@ -313,46 +307,12 @@ public class Encryption3
 					   //set the decrypted one message object's text key's value in parentObj to the new value of the decryptedOneMsgText
 					   parentObj.getJSONArray("privateConvos").getJSONObject(i).getJSONArray("messages").getJSONObject(k).put("text", decryptedOneMsgText);
 
-
 				   }
-
-    
-    			    
     		   }
-    		   
-    		   
-    		   
-    		   
+
     	   }
-    	   
-//    	   // copy json object to new json object
-//    	   JSONObject copy = new JSONObject(parentObj, JSONObject.getNames(parentObj));
-//
-//
-//
-//    	   //Get the convoArray
-//    	   JSONArray cArray = copy.getJSONArray("privateConvos"); // [{}]
-//
-//
-//    	   for(int i = 0; i < cArray.length(); i++)
-//    	   {
-//    		   JSONObject aPrivateConvo = cArray.getJSONObject(i);
-//    		   JSONArray Messages = aPrivateConvo.getJSONArray("messages");
-//
-//    		    // Iterate over the json object in json array messages
-//    		   for (int j = 0; j < Messages.length();j++)
-//    		   {
-//    			   JSONObject aMessage = Messages.getJSONObject(j);
-//    			   String text = aMessage.getString("text");
-//    			   int [] randomNumText = ranz(text);
-//    			   String encryptedText = encrypt(text,randomNumText);
-//
-//    		   }
-//    	   }
-//
-////    	   return copy;
        }
-//
+
        private int[] arrayGen(int strLength, ArrayList<Integer> clientAry)
 	   {
 	   		//create decryption array of one encrypted string length
