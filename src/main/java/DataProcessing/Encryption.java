@@ -110,6 +110,7 @@ public class Encryption
 	}
 
 
+
 	public static void main(String[] args)
 	{
 		String text = "I am enjoying this project";
