@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -181,10 +182,11 @@ public class Encryption3
 
 		Encryption3 op1 = new Encryption3();
 
-		op1.wrapper(parentObj, "encrypt", null);
+		JSONObject returnedObject = op1.wrapper(parentObj, "encrypt", null);
+//		System.out.println("returned Object: "+returnedObject.toString(4));
 	}
         
-       void wrapper(JSONObject parentObj, String doWhat, ArrayList<Integer> randonNumsAryFromClient)
+       JSONObject wrapper(JSONObject parentObj, String doWhat, ArrayList<Integer> randonNumsAryFromClient)
        {
     	  //create arrayList for randomNumbers if encrypting
     	   ArrayList<Integer> randomNumsAry = new ArrayList<Integer>();
@@ -215,18 +217,18 @@ public class Encryption3
 						randomNumsAry.add(randomNumAryForRecipientId[e]);
 
 					}
-				   System.out.println("randomNumsArray: "+randomNumsAry.toString()+" recipientId RandomNumsAry: "+Arrays.toString(randomNumAryForRecipientId));
+//				   System.out.println("randomNumsArray: "+randomNumsAry.toString()+" recipientId RandomNumsAry: "+Arrays.toString(randomNumAryForRecipientId));
 
 
 					 //encrypt the recipientId
 					   String encryptedRecipientId = encrypt(recipientId, randomNumAryForRecipientId);
 
-					   System.out.println("encrypted RecipientId: "+encryptedRecipientId);
+//					   System.out.println("encrypted RecipientId: "+encryptedRecipientId);
 
 					   //set the encrypted RecipientId to the new value of the recipientId key in the parentObj
 				       parentObj.getJSONArray("privateConvos").getJSONObject(i).put("recipientId", encryptedRecipientId);
 
-				       System.out.println("printed object afer recipientId encryption: "+parentObj.toString(3));
+//				       System.out.println("printed object afer recipientId encryption: "+parentObj.toString(3));
 
 
     		   }//if we want to decrypt and we have a random numbers array from the client, we will decrypt
@@ -243,12 +245,12 @@ public class Encryption3
     			   //decrypt the recipientId
         		   String decryptedRecipientId = decrypt(recipientId, decryptAryForRecipientId);
 
-        		   System.out.println("decrypted recipientId: "+decryptedRecipientId);
+//        		   System.out.println("decrypted recipientId: "+decryptedRecipientId);
 
 				   //set the decrypted RecipientId to the new value of the recipientId key in the parentObj
 				   parentObj.getJSONArray("privateConvos").getJSONObject(i).put("recipientId", decryptAryForRecipientId);
 
-				   System.out.println("printed object afer recipientId decryption: "+parentObj.toString(3));
+//				   System.out.println("printed object afer recipientId decryption: "+parentObj.toString(3));
     		   }
     		   
     		   
@@ -277,18 +279,18 @@ public class Encryption3
 						   randomNumsAry.add(randomNumAryForOneMsg[e]);
 					   }
 
-					   System.out.println("randomNumsArray: " + randomNumsAry.toString() + " random nums array for one message: " + Arrays.toString(randomNumAryForOneMsg));
+//					   System.out.println("randomNumsArray: " + randomNumsAry.toString() + " random nums array for one message: " + Arrays.toString(randomNumAryForOneMsg));
 
 					   //send random array of numbers for message, and text from message to encrypt function, store encrypted text
 					   String encryptedOneMsgText = encrypt(oneMsg, randomNumAryForOneMsg);
 
 					   //print the encrypted one message text
-					   System.out.println("encrypted OneMsg: "+encryptedOneMsgText);
+//					   System.out.println("encrypted OneMsg: "+encryptedOneMsgText);
 
 					   //set the encrypted one message object's text key's value in parentObj to the new value of the encryptedOneMsgText
 					   parentObj.getJSONArray("privateConvos").getJSONObject(i).getJSONArray("messages").getJSONObject(k).put("text", encryptedOneMsgText);
 
-					   System.out.println("printed object afer OneMesgText encryption: "+parentObj.toString(3));
+//					   System.out.println("printed object afer OneMesgText encryption: "+parentObj.toString(3));
 				   }
 				   else if(doWhat.equals("decrypt") && randonNumsAryFromClient != null)
 				   {
@@ -302,7 +304,7 @@ public class Encryption3
 					   String decryptedOneMsgText = decrypt(recipientId, decryptAryForOneMsgText);
 
 					   //print the decrypted one message text
-					   System.out.println("decrypted OneMsgText: "+decryptedOneMsgText);
+//					   System.out.println("decrypted OneMsgText: "+decryptedOneMsgText);
 
 					   //set the decrypted one message object's text key's value in parentObj to the new value of the decryptedOneMsgText
 					   parentObj.getJSONArray("privateConvos").getJSONObject(i).getJSONArray("messages").getJSONObject(k).put("text", decryptedOneMsgText);
@@ -311,6 +313,15 @@ public class Encryption3
     		   }
 
     	   }
+
+    	   //store the parentObject and the randomNumsAry in the JSON Object, and return it.
+    	   JSONObject returnObj = new JSONObject();
+
+    	   returnObj.put("data", parentObj);
+    	   returnObj.put("sec", mapAryToString(randomNumsAry));
+
+
+    	   return returnObj;
        }
 
        private int[] arrayGen(int strLength, ArrayList<Integer> clientAry)
@@ -327,6 +338,156 @@ public class Encryption3
 			}
 
 	   	return oneStrDecryptAry;
+	   }
+
+
+	   //when mapping array to string we want to spin each elm forward by the reverse elm at the end of the array & convert it to a string
+	   private String mapAryToString(ArrayList<Integer> ary)
+	   {
+		   //we will spin up the number by these values for each loop
+		   int spinUpValue1 = 179;
+		   int spinUpValue2 = 208;
+
+
+		   String resultString = "";
+		   int midPoint = (ary.size() / 2);
+		   int aryLength = ary.size();
+		   System.out.println("midpoint num: "+midPoint);
+
+
+		   //reverse "last with first" elements in the first half of the array and append to a string
+	   		for (int i=midPoint; i >= 0; i-- )
+		   {
+
+			   int spinnedNum = (ary.get(i) + spinUpValue1);
+
+//				resultString += spinnedNum+",";
+
+			   resultString += Character.toString((char)spinnedNum);
+		   }
+
+		   //reverse "last with first" elements in the second half of the array and append to a string
+		   for(int k=aryLength-1; midPoint < k; k--)
+		   {
+		   	int spinnedNum = (ary.get(k) + spinUpValue2);
+
+//		   		resultString += spinnedNum+", ";
+		   	resultString += Character.toString((char)spinnedNum);
+
+
+		   }
+		System.out.println("array: "+ary.toString());
+		   System.out.println("array length: "+ary.size());
+	   		System.out.println("midpoint in array: "+ary.get(ary.size()/2).toString());
+	   		System.out.println("final num in array: "+ary.get(ary.size()-1));
+
+		   System.out.println("----------------\nStr: "+resultString);
+		   System.out.println("lengthStr: "+resultString.length());
+		   System.out.println("midPoint num in string: "+resultString.charAt(resultString.length()/2));
+	   		System.out.println("final num in string: "+resultString.charAt(resultString.length()-1));
+
+	   		mapStringToAry(resultString);
+
+		   return resultString;
+	   }
+
+
+	   private ArrayList<Integer> mapStringToAry(String str)
+	   {
+		   //we will spin up the number by these values for each loop
+		   int spinDownValue1 = 179;
+		   int spinDownValue2 = 208;
+
+		   String resultString = "";
+
+
+
+	   		//create arrayList
+	   		ArrayList<Integer> myAryList = new ArrayList<Integer>();
+
+		   	//get string without trailing comma
+		   	String properStr = str.substring(0,str.length()-1);
+		   int strLength = properStr.length();
+
+	   		//map string to array
+//		   	String[] strAry = properStr.split(",");
+//			System.out.println("print Array: "+Arrays.toString(strAry));
+
+		    //get midPoint of array
+		   	int midPoint = (strLength / 2);
+
+
+
+		   //reverse "last with first" elements in the first half of the array and append to a string
+		   for (int i=midPoint; i >= 0; i--)
+		   {
+
+			   int spinnedNum = (((int)properStr.charAt(i)) - spinDownValue1);
+
+			   myAryList.add(spinnedNum);
+
+
+		   }
+
+		   //reverse "last with first" elements in the second half of the array and append to a string
+		   for(int k=strLength-1; midPoint < k; k--)
+		   {
+			   int spinnedNum = (((int)properStr.charAt(k))  - spinDownValue2);
+
+			   myAryList.add(spinnedNum);
+
+		   }
+
+
+
+
+
+
+
+
+
+
+//
+//		   //get string without trailing comma
+//		   String properStr = str.substring(0,strLength-1);
+//
+//		   //map string to array
+//		   String[] strAry = properStr.split(",");
+//		   System.out.println("print Array: "+Arrays.toString(strAry));
+//		   //get midPoint of array
+//		   int midPoint = (strAry.length / 2);
+//
+//
+//
+//		   //reverse "last with first" elements in the first half of the array and append to a string
+//		   for (int i=midPoint; i >= 0; i--)
+//		   {
+//
+//			   int spinnedNum = (Integer.valueOf(strAry[i]) - spinDownValue1);
+//
+//			   myAryList.add(spinnedNum);
+//
+//
+//		   }
+//
+//		   //reverse "last with first" elements in the second half of the array and append to a string
+//		   for(int k=strAry.length-1; midPoint < k; k--)
+//		   {
+//			   int spinnedNum = Integer.valueOf(strAry[k].trim()) - spinDownValue2;
+//
+//			   myAryList.add(spinnedNum);
+//
+//		   }
+//
+
+
+
+		   System.out.println("----------\nDecoded Str Ary"+myAryList.toString());
+		   System.out.println("array length: "+myAryList.size());
+		   System.out.println("midpoint in array: "+myAryList.get(myAryList.size()/2).toString());
+		   System.out.println("final num in array: "+myAryList.get(myAryList.size()-1));
+
+			return myAryList;
 	   }
 
 }
