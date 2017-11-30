@@ -208,7 +208,7 @@ public class Encryption3
 
 
         
-   public JSONObject wrapper(JSONObject parentObj, String doWhat)
+   public JSONObject wrapper(JSONObject parentObj, String doWhat, String decryptKey)
    {
        ArrayList<Integer> randonNumsAryFromClient;
 
@@ -219,7 +219,12 @@ public class Encryption3
                randonNumsAryFromClient = null; break;
 
            case "decrypt":
-               randonNumsAryFromClient = mapStringToAry(parentObj.getString("sec")); break;
+               //if no decrypt key, return null ...error has been handled in node server
+               if(decryptKey == "")
+               {
+                   return null;
+               }
+               randonNumsAryFromClient = mapStringToAry(decryptKey); break;
 
                default:
                    System.out.println("FATAL ERROR FROM ENCRYPT / DECRYPT SWITCH!!!");

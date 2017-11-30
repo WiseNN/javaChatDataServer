@@ -17,8 +17,11 @@ public class Main
 
     public static void main(String[] args)
     {
+
         //do not touch
         port(getHerokuAssignedPort());
+
+
 
 
         Main mainClassObj = new Main();
@@ -49,18 +52,19 @@ public class Main
 
             //create encryption object and encrypt data
             Encryption3 op1 = new Encryption3();
-            JSONObject returnObj = op1.wrapper(obj, "encrypt");
+            JSONObject returnObj = op1.wrapper(obj, "encrypt","");
 
             System.out.println("RETURNED OBJECT GRAND FUCKING FINALE!!! : "+returnObj.toString(3));
 
 
             return returnObj;
         });
-        get("/decryptData/:data", (req, res) -> {
+        get("/decryptData", (req, res) -> {
 
             //get quary params
             String strObj = (String)req.queryParams("dataObj");
             String doWhat = (String)req.queryParams("doWhat");
+            String key =  (String)req.queryParams("key");
 
 
 
@@ -72,7 +76,7 @@ public class Main
 
             //create decryption object and decrypt data
             Encryption3 op1 = new Encryption3();
-            JSONObject returnObj = op1.wrapper(obj, doWhat);
+            JSONObject returnObj = op1.wrapper(obj, doWhat, key);
 
             System.out.println("RETURNED OBJECT GRAND FUCKING FINALE!!! : "+returnObj.toString(3));
 
